@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "motion/react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const approaches = [
@@ -7,19 +8,19 @@ const approaches = [
     number: "01",
     title: "Data correctness",
     description:
-      "Understanding transactions, relational models, and consistency. Building applications where data integrity is maintained across multi-step operations.",
+      "Understanding transactions, relational models, and consistency. Building applications where data integrity is maintained across multi-step operations using the Transactional Outbox pattern and ACID transaction boundaries.",
   },
   {
     number: "02",
     title: "Reliable execution",
     description:
-      "Exploring background jobs, retries, and worker lifecycles. Designing systems that handle failures gracefully rather than hiding them.",
+      "Exploring background jobs, retries, and worker lifecycles. Designing systems that handle failures gracefully with dead-letter queues, worker heartbeats, and exponential backoff retry engines rather than hiding errors.",
   },
   {
     number: "03",
     title: "Maintainable software",
     description:
-      "Separating responsibilities, testing behaviour, and evolving applications over time. Preferring clarity over cleverness.",
+      "Decoupling controllers from service domain rules, testing behavior rigorously with Mockito and MockMvc, and evolving database schemas through automated versioned migrations like Alembic and Flyway.",
   },
 ];
 
@@ -27,7 +28,7 @@ export function EngineeringApproach() {
   return (
     <section
       className="section-spacing"
-      style={{ borderBottom: "1px solid var(--border)" }}
+      style={{ borderBottom: "1px solid var(--border)", position: "relative" }}
       aria-labelledby="approach-heading"
     >
       <div className="container-main">
@@ -36,22 +37,19 @@ export function EngineeringApproach() {
           title="How I think about building software"
         />
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "1px",
-            backgroundColor: "var(--border)",
-            border: "1px solid var(--border)",
-          }}
-          className="approach-grid"
-        >
-          {approaches.map((item) => (
-            <div
+        <div className="approach-grid">
+          {approaches.map((item, idx) => (
+            <motion.div
               key={item.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              whileHover={{ y: -4 }}
               style={{
                 backgroundColor: "var(--bg-primary)",
-                padding: "32px",
+                padding: "36px 32px",
+                transition: "background-color 200ms ease, border-color 200ms ease",
               }}
             >
               <p
@@ -67,10 +65,10 @@ export function EngineeringApproach() {
               </p>
               <h3
                 style={{
-                  fontSize: "18px",
+                  fontSize: "19px",
                   fontWeight: 400,
                   color: "var(--text-primary)",
-                  marginBottom: "12px",
+                  marginBottom: "14px",
                   letterSpacing: "-0.01em",
                 }}
               >
@@ -80,12 +78,12 @@ export function EngineeringApproach() {
                 style={{
                   color: "var(--text-secondary)",
                   fontSize: "14px",
-                  lineHeight: 1.7,
+                  lineHeight: 1.75,
                 }}
               >
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

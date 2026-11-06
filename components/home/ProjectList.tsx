@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { motion } from "motion/react";
 import { projects } from "@/lib/projects";
 import { StatusLabel } from "@/components/ui/StatusLabel";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { useState } from "react";
 
 export function ProjectList() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -12,14 +13,12 @@ export function ProjectList() {
   return (
     <section
       className="section-spacing"
-      style={{ borderBottom: "1px solid var(--border)" }}
+      style={{ borderBottom: "1px solid var(--border)", position: "relative" }}
       aria-labelledby="work-heading"
     >
       <div className="container-main">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "16px", marginBottom: "56px" }}>
-          <div>
-            <SectionHeading number="02 / SELECTED WORK" title="Projects" />
-          </div>
+          <SectionHeading number="02 / SELECTED WORK" title="Projects" />
           <span
             style={{
               fontFamily: "var(--font-mono)",
@@ -33,110 +32,116 @@ export function ProjectList() {
           </span>
         </div>
 
-        <div
-          style={{
-            borderTop: "1px solid var(--border)",
-          }}
-        >
+        <div style={{ borderTop: "1px solid var(--border)" }}>
           {projects.map((project, i) => {
             const isHovered = hoveredId === project.id;
             return (
-              <Link
+              <motion.div
                 key={project.id}
-                href={`/projects/${project.slug}`}
-                onMouseEnter={() => setHoveredId(project.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "48px 1fr auto auto 24px",
-                  alignItems: "center",
-                  gap: "24px",
-                  padding: "24px 16px",
-                  borderBottom: "1px solid var(--border)",
-                  textDecoration: "none",
-                  transition: "background-color var(--ease-fast)",
-                  backgroundColor: isHovered ? "var(--bg-hover)" : "transparent",
-                  margin: "0 -16px",
-                }}
-                className="project-row-link"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.35, delay: i * 0.08 }}
               >
-                {/* Number */}
-                <span
+                <Link
+                  href={`/projects/${project.slug}`}
+                  onMouseEnter={() => setHoveredId(project.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                   style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "12px",
-                    color: "var(--text-muted)",
-                    letterSpacing: "0.05em",
+                    display: "grid",
+                    gridTemplateColumns: "48px 1fr auto auto 24px",
+                    alignItems: "center",
+                    gap: "24px",
+                    padding: "26px 16px",
+                    margin: "0 -16px",
+                    borderBottom: "1px solid var(--border)",
+                    textDecoration: "none",
+                    backgroundColor: isHovered ? "var(--bg-hover)" : "transparent",
+                    transition: "background-color 200ms ease",
                   }}
+                  className="project-row-link"
                 >
-                  {project.number}
-                </span>
-
-                {/* Name + tagline */}
-                <div>
-                  <h3
-                    style={{
-                      fontSize: "18px",
-                      fontWeight: 400,
-                      color: "var(--text-primary)",
-                      marginBottom: "4px",
-                      letterSpacing: "-0.01em",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
+                  {/* Number */}
+                  <motion.span
+                    animate={{ color: isHovered ? "var(--text-primary)" : "var(--text-muted)" }}
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "11px",
-                      color: "var(--text-muted)",
+                      fontSize: "12px",
                       letterSpacing: "0.05em",
                     }}
                   >
-                    {project.stack.slice(0, 3).join(" · ")}
-                  </p>
-                </div>
+                    {project.number}
+                  </motion.span>
 
-                {/* Tagline — hidden on mobile */}
-                <span
-                  style={{
-                    color: "var(--text-secondary)",
-                    fontSize: "14px",
-                    display: "none",
-                  }}
-                  className="tagline-cell"
-                >
-                  {project.tagline}
-                </span>
+                  {/* Name + Stack */}
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: "19px",
+                        fontWeight: 400,
+                        color: "var(--text-primary)",
+                        marginBottom: "4px",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {project.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "11px",
+                        color: "var(--text-muted)",
+                        letterSpacing: "0.05em",
+                      }}
+                    >
+                      {project.stack.slice(0, 4).join(" · ")}
+                    </p>
+                  </div>
 
-                {/* Status */}
-                <StatusLabel status={project.status} />
+                  {/* Tagline */}
+                  <span
+                    style={{
+                      color: "var(--text-secondary)",
+                      fontSize: "14px",
+                      display: "none",
+                    }}
+                    className="tagline-cell"
+                  >
+                    {project.tagline}
+                  </span>
 
-                {/* Arrow */}
-                <span
-                  style={{
-                    color: "var(--text-secondary)",
-                    fontSize: "16px",
-                    transform: isHovered ? "translateX(4px)" : "translateX(0)",
-                    transition: "transform var(--ease-fast)",
-                    display: "inline-block",
-                  }}
-                >
-                  →
-                </span>
-              </Link>
+                  {/* Status */}
+                  <StatusLabel status={project.status} />
+
+                  {/* Arrow with spring motion */}
+                  <motion.span
+                    animate={{ x: isHovered ? 5 : 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    style={{
+                      color: isHovered ? "var(--text-primary)" : "var(--text-secondary)",
+                      fontSize: "18px",
+                      display: "inline-block",
+                    }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
 
-        <div style={{ marginTop: "32px" }}>
-          <Link
-            href="/projects"
-            className="link-underline"
-          >
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          style={{ marginTop: "36px" }}
+        >
+          <Link href="/projects" className="link-underline">
             View all project details →
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

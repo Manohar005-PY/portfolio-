@@ -296,3 +296,64 @@ a { color: inherit; text-decoration: none; }
 .note-row-hover:hover {
   background-color: var(--bg-hover) !important;
 }
+
+/* ─── Animated Living Strokes & Pulses ────────────────────────────── */
+
+@keyframes flowStroke {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  70%, 100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.flowing-line {
+  stroke-dasharray: 6 6;
+  animation: flowStroke 1.5s linear infinite;
+}
+
+.flowing-line-fast {
+  stroke-dasharray: 4 4;
+  animation: flowStroke 0.8s linear infinite;
+}
+
+.radar-dot {
+  position: relative;
+  display: inline-flex;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--text-primary);
+}
+
+.radar-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--text-primary);
+  animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}

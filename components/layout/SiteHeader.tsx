@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -33,7 +34,9 @@ export function SiteHeader() {
           top: 0,
           zIndex: 50,
           height: "76px",
-          backgroundColor: "var(--bg-primary)",
+          backgroundColor: scrolled ? "rgba(11, 11, 11, 0.85)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
           borderBottom: `1px solid ${scrolled ? "var(--border)" : "transparent"}`,
           transition: "border-color var(--ease-normal), background-color var(--ease-normal)",
         }}
@@ -47,21 +50,39 @@ export function SiteHeader() {
             justifyContent: "space-between",
           }}
         >
-          {/* Logo */}
+          {/* Logo as Manohar */}
           <Link
             href="/"
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "18px",
-              fontWeight: 500,
-              letterSpacing: "-0.02em",
-              color: "var(--text-primary)",
-              transition: "opacity var(--ease-fast)",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              textDecoration: "none",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            M.
+            <motion.div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            >
+              <span className="radar-dot" />
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  letterSpacing: "0.15em",
+                  color: "var(--text-primary)",
+                  textTransform: "uppercase",
+                }}
+              >
+                MANOHAR
+              </span>
+            </motion.div>
           </Link>
 
           {/* Desktop nav */}
@@ -77,26 +98,31 @@ export function SiteHeader() {
                   key={href}
                   href={href}
                   style={{
+                    position: "relative",
                     fontFamily: "var(--font-mono)",
                     fontSize: "11px",
                     letterSpacing: "0.1em",
                     color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
-                    borderBottom: isActive ? "1px solid var(--text-primary)" : "1px solid transparent",
-                    paddingBottom: "2px",
-                    transition: "color var(--ease-fast), border-color var(--ease-fast)",
+                    padding: "6px 0",
+                    transition: "color var(--ease-fast)",
                   }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = "var(--text-primary)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }
-                  }}
+                  className="link-muted-hover"
                 >
-                  {label}
+                  <span>{label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: "1px",
+                        backgroundColor: "var(--text-primary)",
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </Link>
               );
             })}

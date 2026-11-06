@@ -1,55 +1,76 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { motion } from "motion/react";
 import { siteMetadata } from "@/lib/metadata";
 
 export function Hero() {
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+
   return (
     <section
       aria-label="Introduction"
       style={{
-        minHeight: "70vh",
+        minHeight: "75vh",
         display: "flex",
         alignItems: "center",
         borderBottom: "1px solid var(--border)",
+        position: "relative",
       }}
     >
-      <div className="container-main" style={{ paddingTop: "64px", paddingBottom: "64px", width: "100%" }}>
+      <div className="container-main" style={{ paddingTop: "72px", paddingBottom: "72px", width: "100%" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr auto",
-            gap: "64px",
+            gridTemplateColumns: "1.15fr 0.85fr",
+            gap: "48px",
             alignItems: "center",
           }}
           className="hero-grid"
         >
-          {/* Text content */}
+          {/* Text Content */}
           <div>
-            <p
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "11px",
-                letterSpacing: "0.1em",
-                color: "var(--text-muted)",
-                marginBottom: "24px",
-                animation: "fadeUp 0.4s ease both",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "6px 12px",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--radius-sm)",
+                backgroundColor: "var(--bg-surface)",
+                marginBottom: "28px",
               }}
             >
-              MANOHAR / PORTFOLIO · 01 — INTRODUCTION
-            </p>
+              <span className="radar-dot" />
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "11px",
+                  letterSpacing: "0.1em",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                BACKEND & SYSTEMS · BENGALURU, INDIA
+              </span>
+            </motion.div>
 
-            <h1
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               style={{
-                fontSize: "clamp(36px, 6vw, 72px)",
+                fontSize: "clamp(38px, 6vw, 70px)",
                 fontWeight: 400,
                 letterSpacing: "-0.03em",
-                lineHeight: 1.1,
+                lineHeight: 1.08,
                 color: "var(--text-primary)",
-                marginBottom: "24px",
+                marginBottom: "28px",
                 maxWidth: "680px",
-                animation: "fadeUp 0.4s 0.1s ease both",
               }}
             >
               Building backend
@@ -57,56 +78,73 @@ export function Hero() {
               applications with
               <br />
               care and precision.
-            </h1>
+            </motion.h1>
 
-            <p
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               style={{
                 fontSize: "16px",
                 color: "var(--text-secondary)",
                 marginBottom: "40px",
-                maxWidth: "480px",
-                lineHeight: 1.7,
-                animation: "fadeUp 0.4s 0.2s ease both",
+                maxWidth: "500px",
+                lineHeight: 1.75,
               }}
             >
-              I work with APIs, relational databases, background processing,
-              and application infrastructure. Computer Science student based in
-              Bengaluru, India.
-            </p>
+              I design resilient APIs, relational schemas with strict transaction boundaries,
+              and asynchronous background execution platforms. Focused on data consistency,
+              failure recovery, and clean application architecture.
+            </motion.p>
 
-            <div
+            {/* CTAs with Motion */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
               style={{
                 display: "flex",
-                gap: "24px",
+                gap: "20px",
+                alignItems: "center",
                 flexWrap: "wrap",
-                animation: "fadeUp 0.4s 0.3s ease both",
               }}
             >
-              <Link href="/projects" className="btn-outline">
-                Explore projects ↗
-              </Link>
-              <a
-                href={siteMetadata.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-underline"
-              >
-                GitHub ↗
-              </a>
-              <Link href="/resume" className="link-underline">
-                Resume
-              </Link>
-            </div>
+              <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                <Link href="/projects" className="btn-outline">
+                  Explore projects ↗
+                </Link>
+              </motion.div>
 
-            <div
+              <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                <a
+                  href={siteMetadata.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline"
+                >
+                  GitHub ↗
+                </a>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.98 }}>
+                <Link href="/resume" className="link-underline">
+                  Resume
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Footer Metadata */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
               style={{
                 display: "flex",
                 gap: "24px",
                 marginTop: "48px",
-                animation: "fadeUp 0.4s 0.4s ease both",
               }}
             >
-              {["COMPUTER SCIENCE · 2027", "BENGALURU, INDIA"].map((tag) => (
+              {["COMPUTER SCIENCE · 2027", "PYTHON · JAVA · POSTGRESQL"].map((tag) => (
                 <span
                   key={tag}
                   style={{
@@ -119,12 +157,19 @@ export function Hero() {
                   {tag}
                 </span>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          {/* System constellation */}
-          <div className="hero-constellation">
-            <SystemConstellation />
+          {/* Living System Constellation */}
+          <div className="hero-constellation" style={{ justifyContent: "center" }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              style={{ width: "100%", maxWidth: "420px" }}
+            >
+              <SystemConstellation selectedNode={selectedNode} onSelectNode={setSelectedNode} />
+            </motion.div>
           </div>
         </div>
       </div>
@@ -132,102 +177,178 @@ export function Hero() {
   );
 }
 
-function SystemConstellation() {
-  const svgRef = useRef<SVGSVGElement>(null);
+interface ConstellationProps {
+  selectedNode: string | null;
+  onSelectNode: (id: string | null) => void;
+}
 
-  useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
-
-    // Simple ambient pulse on nodes
-    const nodes = svg.querySelectorAll(".node-circle");
-    nodes.forEach((node, i) => {
-      const el = node as SVGCircleElement;
-      let t = i * 1.3;
-      let direction = 1;
-
-      const pulse = () => {
-        t += 0.02 * direction;
-        if (t > i * 1.3 + 1) direction = -1;
-        if (t < i * 1.3 - 0.3) direction = 1;
-        const opacity = 0.4 + Math.sin(t) * 0.3;
-        el.style.opacity = String(Math.max(0.1, opacity));
-        requestAnimationFrame(pulse);
-      };
-      requestAnimationFrame(pulse);
-    });
-  }, []);
-
+function SystemConstellation({ selectedNode, onSelectNode }: ConstellationProps) {
   return (
-    <svg
-      ref={svgRef}
-      width="320"
-      height="320"
-      viewBox="0 0 320 320"
-      fill="none"
-      aria-hidden="true"
-      style={{ opacity: 0.6 }}
+    <div
+      style={{
+        border: "1px solid var(--border)",
+        borderRadius: "var(--radius-md)",
+        backgroundColor: "var(--bg-surface)",
+        padding: "24px",
+        position: "relative",
+      }}
     >
-      {/* Connection lines */}
-      <line x1="160" y1="60" x2="80" y2="140" stroke="var(--border)" strokeWidth="1" strokeDasharray="4 4" />
-      <line x1="160" y1="60" x2="240" y2="140" stroke="var(--border)" strokeWidth="1" />
-      <line x1="80" y1="140" x2="160" y2="220" stroke="var(--border)" strokeWidth="1" />
-      <line x1="240" y1="140" x2="160" y2="220" stroke="var(--border)" strokeWidth="1" strokeDasharray="4 4" />
-      <line x1="80" y1="140" x2="40" y2="220" stroke="var(--border)" strokeWidth="1" strokeDasharray="2 6" />
-      <line x1="240" y1="140" x2="280" y2="220" stroke="var(--border)" strokeWidth="1" />
-      <line x1="160" y1="220" x2="120" y2="280" stroke="var(--border)" strokeWidth="1" strokeDasharray="4 4" />
-      <line x1="160" y1="220" x2="200" y2="280" stroke="var(--border)" strokeWidth="1" />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+        <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "var(--text-muted)" }}>
+          LIVING ARCHITECTURE MOTIF
+        </p>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--text-muted)" }}>
+          ACTIVE PACKET FLOW
+        </span>
+      </div>
 
-      {/* Edge labels */}
-      <text x="108" y="92" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-mono)" letterSpacing="0.05em">async</text>
-      <text x="195" y="92" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-mono)" letterSpacing="0.05em">HTTP</text>
+      <svg
+        width="100%"
+        viewBox="0 0 360 320"
+        fill="none"
+        aria-label="Animated Living System Constellation"
+        role="img"
+      >
+        <defs>
+          <path id="path-api-service" d="M180,60 L90,135" />
+          <path id="path-service-db" d="M90,135 L180,215" />
+          <path id="path-api-queue" d="M180,60 L270,135" />
+          <path id="path-queue-worker" d="M270,135 L270,215" />
+          <path id="path-worker-db" d="M270,215 L180,215" />
 
-      {/* Nodes */}
-      {/* API */}
-      <g>
-        <rect x="130" y="40" width="60" height="40" rx="3" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" />
-        <text x="160" y="64" fill="var(--text-secondary)" fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="0.05em">FastAPI</text>
-      </g>
+          {/* Glowing pulse filter */}
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
 
-      {/* Service */}
-      <g>
-        <rect x="50" y="120" width="60" height="40" rx="3" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" />
-        <text x="80" y="144" fill="var(--text-secondary)" fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="0.05em">Service</text>
-      </g>
+        {/* Static background lines */}
+        <line x1="180" y1="60" x2="90" y2="135" stroke="var(--border)" strokeWidth="1" />
+        <line x1="90" y1="135" x2="180" y2="215" stroke="var(--border)" strokeWidth="1" />
+        <line x1="180" y1="60" x2="270" y2="135" stroke="var(--border)" strokeWidth="1" />
+        <line x1="270" y1="135" x2="270" y2="215" stroke="var(--border)" strokeWidth="1" />
+        <line x1="270" y1="215" x2="180" y2="215" stroke="var(--border)" strokeWidth="1" />
 
-      {/* Worker */}
-      <g>
-        <rect x="210" y="120" width="60" height="40" rx="3" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" />
-        <text x="240" y="144" fill="var(--text-secondary)" fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="0.05em">Worker</text>
-      </g>
+        {/* Active Animated Flow Lines */}
+        <line x1="180" y1="60" x2="90" y2="135" stroke="var(--border-hover)" strokeWidth="1.5" className="flowing-line" />
+        <line x1="90" y1="135" x2="180" y2="215" stroke="var(--border-hover)" strokeWidth="1.5" className="flowing-line-fast" />
+        <line x1="180" y1="60" x2="270" y2="135" stroke="var(--border-hover)" strokeWidth="1.5" className="flowing-line" />
+        <line x1="270" y1="135" x2="270" y2="215" stroke="var(--border-hover)" strokeWidth="1.5" className="flowing-line-fast" />
+        <line x1="270" y1="215" x2="180" y2="215" stroke="var(--border-hover)" strokeWidth="1.5" className="flowing-line" />
 
-      {/* Redis (Queue shape) */}
-      <g>
-        <rect x="10" y="200" width="60" height="40" rx="3" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" strokeDasharray="3 3" />
-        <text x="40" y="224" fill="var(--text-muted)" fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="0.05em">Redis</text>
-      </g>
+        {/* Traveling Data Packet 1: API -> Service -> DB */}
+        <circle r="3" fill="var(--text-primary)">
+          <animateMotion dur="2.8s" repeatCount="indefinite" path="M180,60 L90,135 L180,215" />
+        </circle>
 
-      {/* PostgreSQL (cylinder-like) */}
-      <g>
-        <ellipse cx="160" cy="225" rx="30" ry="8" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" />
-        <rect x="130" y="225" width="60" height="24" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" />
-        <ellipse cx="160" cy="249" rx="30" ry="8" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" />
-        <text x="160" y="241" fill="var(--text-secondary)" fontSize="8" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="0.05em">Postgres</text>
-      </g>
+        {/* Traveling Data Packet 2: API -> Queue -> Worker -> DB */}
+        <circle r="3" fill="var(--text-secondary)">
+          <animateMotion dur="3.6s" repeatCount="indefinite" path="M180,60 L270,135 L270,215 L180,215" />
+        </circle>
 
-      {/* Cloud */}
-      <g>
-        <rect x="250" y="200" width="60" height="40" rx="3" fill="var(--bg-surface)" stroke="var(--border)" strokeWidth="1" />
-        <text x="280" y="224" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="0.05em">Cloud</text>
-      </g>
+        {/* Nodes */}
 
-      {/* Pulsing dots on nodes */}
-      <circle className="node-circle" cx="160" cy="60" r="3" fill="var(--text-secondary)" style={{ opacity: 0.6 }} />
-      <circle className="node-circle" cx="80" cy="140" r="3" fill="var(--text-secondary)" style={{ opacity: 0.4 }} />
-      <circle className="node-circle" cx="240" cy="140" r="3" fill="var(--text-secondary)" style={{ opacity: 0.5 }} />
-      <circle className="node-circle" cx="40" cy="220" r="3" fill="var(--text-secondary)" style={{ opacity: 0.3 }} />
-      <circle className="node-circle" cx="160" cy="220" r="3" fill="var(--text-secondary)" style={{ opacity: 0.6 }} />
-      <circle className="node-circle" cx="280" cy="220" r="3" fill="var(--text-secondary)" style={{ opacity: 0.4 }} />
-    </svg>
+        {/* Node 1: FastAPI API Gateway */}
+        <g
+          style={{ cursor: "pointer" }}
+          onClick={() => onSelectNode(selectedNode === "api" ? null : "api")}
+        >
+          <rect
+            x="140"
+            y="35"
+            width="80"
+            height="46"
+            rx="4"
+            fill="var(--bg-primary)"
+            stroke={selectedNode === "api" ? "var(--text-primary)" : "var(--border)"}
+            strokeWidth="1.5"
+          />
+          <text x="180" y="56" fill="var(--text-primary)" fontSize="10" fontFamily="var(--font-mono)" textAnchor="middle">FastAPI</text>
+          <text x="180" y="70" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-mono)" textAnchor="middle">REST Gateway</text>
+        </g>
+
+        {/* Node 2: Service Layer */}
+        <g
+          style={{ cursor: "pointer" }}
+          onClick={() => onSelectNode(selectedNode === "service" ? null : "service")}
+        >
+          <rect
+            x="50"
+            y="112"
+            width="80"
+            height="46"
+            rx="4"
+            fill="var(--bg-primary)"
+            stroke={selectedNode === "service" ? "var(--text-primary)" : "var(--border)"}
+            strokeWidth="1.5"
+          />
+          <text x="90" y="133" fill="var(--text-primary)" fontSize="10" fontFamily="var(--font-mono)" textAnchor="middle">Services</text>
+          <text x="90" y="147" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-mono)" textAnchor="middle">Tx Ownership</text>
+        </g>
+
+        {/* Node 3: Redis Queue */}
+        <g
+          style={{ cursor: "pointer" }}
+          onClick={() => onSelectNode(selectedNode === "redis" ? null : "redis")}
+        >
+          <rect
+            x="230"
+            y="112"
+            width="80"
+            height="46"
+            rx="4"
+            fill="var(--bg-primary)"
+            stroke={selectedNode === "redis" ? "var(--text-primary)" : "var(--border)"}
+            strokeWidth="1.5"
+            strokeDasharray="4 4"
+          />
+          <text x="270" y="133" fill="var(--text-primary)" fontSize="10" fontFamily="var(--font-mono)" textAnchor="middle">Redis Queue</text>
+          <text x="270" y="147" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-mono)" textAnchor="middle">Broker</text>
+        </g>
+
+        {/* Node 4: Worker Process */}
+        <g
+          style={{ cursor: "pointer" }}
+          onClick={() => onSelectNode(selectedNode === "worker" ? null : "worker")}
+        >
+          <rect
+            x="230"
+            y="192"
+            width="80"
+            height="46"
+            rx="4"
+            fill="var(--bg-primary)"
+            stroke={selectedNode === "worker" ? "var(--text-primary)" : "var(--border)"}
+            strokeWidth="1.5"
+          />
+          <text x="270" y="213" fill="var(--text-primary)" fontSize="10" fontFamily="var(--font-mono)" textAnchor="middle">Workers</text>
+          <text x="270" y="227" fill="var(--text-muted)" fontSize="8" fontFamily="var(--font-mono)" textAnchor="middle">Execution Daemon</text>
+        </g>
+
+        {/* Node 5: PostgreSQL Database */}
+        <g
+          style={{ cursor: "pointer" }}
+          onClick={() => onSelectNode(selectedNode === "postgres" ? null : "postgres")}
+        >
+          <ellipse cx="180" cy="205" rx="35" ry="8" fill="var(--bg-primary)" stroke="var(--border)" strokeWidth="1.5" />
+          <rect x="145" y="205" width="70" height="25" fill="var(--bg-primary)" />
+          <line x1="145" y1="205" x2="145" y2="230" stroke="var(--border)" strokeWidth="1.5" />
+          <line x1="215" y1="205" x2="215" y2="230" stroke="var(--border)" strokeWidth="1.5" />
+          <ellipse cx="180" cy="230" rx="35" ry="8" fill="var(--bg-primary)" stroke="var(--border)" strokeWidth="1.5" />
+          <text x="180" y="222" fill="var(--text-primary)" fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle">PostgreSQL</text>
+        </g>
+
+        {/* Bottom Status bar inside SVG */}
+        <text x="180" y="280" fill="var(--text-muted)" fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle">
+          {selectedNode === "api" && "FastAPI: Non-blocking asynchronous route validation and JWT authentication."}
+          {selectedNode === "service" && "Services: Transaction boundaries owned strictly above repositories."}
+          {selectedNode === "redis" && "Redis: Ephemeral, ultra-fast task coordination and pub/sub transport."}
+          {selectedNode === "worker" && "Workers: Decoupled daemons with heartbeat monitors and retry loops."}
+          {selectedNode === "postgres" && "PostgreSQL: ACID persistence, pessimistic locking and relational integrity."}
+          {!selectedNode && "Click any system node to inspect its architectural responsibility."}
+        </text>
+      </svg>
+    </div>
   );
 }

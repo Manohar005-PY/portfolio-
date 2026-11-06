@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { buildMetadata } from "@/lib/metadata";
 import { themeScript } from "@/lib/theme-script";
+import { LivingBackground } from "@/components/ui/LivingBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,11 +37,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body>
+        <LivingBackground />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
         <SiteHeader />
-        <main id="main-content">{children}</main>
+        <main id="main-content" style={{ position: "relative", zIndex: 1 }}>{children}</main>
         <SiteFooter />
       </body>
     </html>

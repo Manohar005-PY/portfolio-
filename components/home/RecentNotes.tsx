@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "motion/react";
 import { notes } from "@/lib/notes";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -8,7 +11,7 @@ export function RecentNotes() {
   return (
     <section
       className="section-spacing"
-      style={{ borderBottom: "1px solid var(--border)" }}
+      style={{ borderBottom: "1px solid var(--border)", position: "relative" }}
       aria-labelledby="notes-heading"
     >
       <div className="container-main">
@@ -29,67 +32,75 @@ export function RecentNotes() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
           {recent.map((note, i) => (
-            <Link
+            <motion.div
               key={note.slug}
-              href={`/notes/${note.slug}`}
-              className="note-row-hover"
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "24px",
-                padding: "24px 16px",
-                margin: "0 -16px",
-                borderTop: i === 0 ? "1px solid var(--border)" : "none",
-                borderBottom: "1px solid var(--border)",
-                textDecoration: "none",
-              }}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: i * 0.08 }}
             >
-              <span
+              <Link
+                href={`/notes/${note.slug}`}
+                className="note-row-hover"
                 style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "10px",
-                  letterSpacing: "0.1em",
-                  color: "var(--text-muted)",
-                  paddingTop: "4px",
-                  minWidth: "60px",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "24px",
+                  padding: "26px 16px",
+                  margin: "0 -16px",
+                  borderTop: i === 0 ? "1px solid var(--border)" : "none",
+                  borderBottom: "1px solid var(--border)",
+                  textDecoration: "none",
                 }}
               >
-                {String(i + 1).padStart(2, "0")} — {note.category.toUpperCase().slice(0, 2)}
-              </span>
-              <div style={{ flex: 1 }}>
-                <h3
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: 400,
-                    color: "var(--text-primary)",
-                    marginBottom: "6px",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {note.title}
-                </h3>
-                <p
-                  style={{
-                    color: "var(--text-secondary)",
-                    fontSize: "14px",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {note.summary}
-                </p>
-                <p
+                <span
                   style={{
                     fontFamily: "var(--font-mono)",
                     fontSize: "10px",
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.1em",
                     color: "var(--text-muted)",
-                    marginTop: "10px",
+                    paddingTop: "4px",
+                    minWidth: "60px",
                   }}
                 >
-                  {note.category.toUpperCase()} · {note.readingTime.toUpperCase()}
-                </p>
-              </div>
-            </Link>
+                  0{i + 1} — {note.category.toUpperCase().slice(0, 3)}
+                </span>
+                <div style={{ flex: 1 }}>
+                  <h3
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: 400,
+                      color: "var(--text-primary)",
+                      marginBottom: "8px",
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    {note.title}
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--text-secondary)",
+                      fontSize: "14px",
+                      lineHeight: 1.65,
+                    }}
+                  >
+                    {note.summary}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "10px",
+                      letterSpacing: "0.08em",
+                      color: "var(--text-muted)",
+                      marginTop: "12px",
+                    }}
+                  >
+                    {note.category.toUpperCase()} · {note.readingTime.toUpperCase()}
+                  </p>
+                </div>
+                <span style={{ color: "var(--text-muted)", paddingTop: "4px" }}>→</span>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>
