@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { siteMetadata } from "@/lib/metadata";
+import { certifications } from "@/lib/certifications";
 
 const skills = [
   { category: "Languages", items: "Python, Java, SQL, TypeScript" },
@@ -18,7 +19,6 @@ const projects = [
     description:
       "Transactional order and payment backend using service-layer transactions and a transactional outbox; includes RabbitMQ consumers with retry queues and dead-letter handling, JWT authentication, Argon2 password hashing and Alembic migrations.",
     github: "https://github.com/Manohar005-PY/OrderFlow",
-    doc: "https://drive.google.com/file/d/1o7E3ZWCVem7knWsUbeXOwoLXCskvhvA9/view?usp=drive_link",
   },
   {
     title: "FlowForge",
@@ -26,7 +26,6 @@ const projects = [
     description:
       "Distributed job execution platform with FastAPI, SQLAlchemy and PostgreSQL for job lifecycle tracking; Redis-backed queue with independent workers, retry handling and automated retry tests.",
     github: "https://github.com/Manohar005-PY/FlowForge",
-    doc: "https://drive.google.com/file/d/1lmFqZJrNQDqdy5tHJp6jTbs3TzMQ82DJ/view?usp=drive_link",
   },
   {
     title: "KAGE",
@@ -42,7 +41,6 @@ const projects = [
     description:
       "Incident lifecycle REST API built with Java and Spring Boot, separating controllers from service-layer lifecycle rules, centralized RFC 7807 error handling and validated with JUnit/MockMvc tests.",
     github: "https://github.com/Manohar005-PY/IncidentHub",
-    doc: "https://drive.google.com/file/d/1y2--imOWb4hoUSIA72CtFAn4XH8is1ku/view?usp=drive_link",
   },
   {
     title: "SupportDesk",
@@ -53,18 +51,11 @@ const projects = [
   },
 ];
 
-const certifications = [
-  "Python for Machine Learning Training — Spoken Tutorial",
-  "Java Training — Spoken Tutorial",
-  "Git Training — Spoken Tutorial",
-];
-
 export default function ResumePage() {
   return (
     <div className="container-main" style={{ paddingTop: "80px", paddingBottom: "112px", position: "relative" }}>
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         style={{
@@ -125,7 +116,7 @@ export default function ResumePage() {
 
       <div style={{ maxWidth: "760px" }}>
         {/* Profile */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div>
           <ResumeSection title="PROFILE">
             <p style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
               Computer Science student with a focus on backend engineering and distributed systems.
@@ -138,7 +129,7 @@ export default function ResumePage() {
         </motion.div>
 
         {/* Education */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div>
           <ResumeSection title="EDUCATION">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "8px" }}>
               <div>
@@ -160,7 +151,7 @@ export default function ResumePage() {
         </motion.div>
 
         {/* Technical skills */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div>
           <ResumeSection title="TECHNICAL SKILLS">
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {skills.map((s) => (
@@ -174,7 +165,7 @@ export default function ResumePage() {
         </motion.div>
 
         {/* Projects */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div>
           <ResumeSection title="SELECTED PROJECTS">
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
               {projects.map((p) => (
@@ -192,11 +183,6 @@ export default function ResumePage() {
                           Live Demo ↗
                         </a>
                       )}
-                      {p.doc && (
-                        <a href={p.doc} target="_blank" rel="noopener noreferrer" className="link-underline" style={{ fontSize: "11px" }}>
-                          Architecture Spec ↗
-                        </a>
-                      )}
                     </div>
                     <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--text-muted)", letterSpacing: "0.06em" }}>{p.stack}</span>
                   </div>
@@ -208,21 +194,21 @@ export default function ResumePage() {
         </motion.div>
 
         {/* Certifications */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div>
           <ResumeSection title="CERTIFICATIONS">
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               {certifications.map((cert) => (
-                <div key={cert} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <a key={cert.title} href={cert.href} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "12px", width: "fit-content" }} className="link-muted-hover">
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--text-muted)" }}>—</span>
-                  <span style={{ color: "var(--text-secondary)", fontSize: "14px" }}>{cert}</span>
-                </div>
+                  <span style={{ color: "var(--text-secondary)", fontSize: "14px" }}>{cert.title} — {cert.issuer} ↗</span>
+                </a>
               ))}
             </div>
           </ResumeSection>
         </motion.div>
 
         {/* Contact links */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div>
           <ResumeSection title="DIRECT CONTACT">
             <div style={{ display: "flex", gap: "32px", flexWrap: "wrap" }}>
               <a href="mailto:dmanoharwork@gmail.com" className="link-underline" style={{ fontSize: "14px" }}>

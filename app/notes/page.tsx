@@ -9,7 +9,6 @@ export default function NotesPage() {
     <div className="container-main" style={{ paddingTop: "80px", paddingBottom: "112px", position: "relative" }}>
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         style={{ marginBottom: "72px", maxWidth: "680px" }}
@@ -28,7 +27,6 @@ export default function NotesPage() {
 
       {/* Featured note with Motion hover */}
       <motion.div
-        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: 0.1 }}
         style={{ marginBottom: "64px" }}
@@ -73,9 +71,6 @@ export default function NotesPage() {
         {notes.map((note, i) => (
           <motion.div
             key={note.slug}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.35, delay: i * 0.08 }}
           >
             <Link

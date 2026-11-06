@@ -38,13 +38,9 @@ export function EngineeringApproach() {
         />
 
         <div className="approach-grid">
-          {approaches.map((item, idx) => (
+          {approaches.map((item) => (
             <motion.div
               key={item.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
               whileHover={{ y: -4 }}
               style={{
                 backgroundColor: "var(--bg-primary)",

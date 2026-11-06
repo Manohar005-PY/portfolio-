@@ -29,7 +29,7 @@ export function SiteFooter() {
             marginBottom: "24px",
           }}
         >
-          CONTACT
+          GET IN TOUCH
         </p>
         <h2
           style={{
@@ -42,7 +42,7 @@ export function SiteFooter() {
             lineHeight: 1.2,
           }}
         >
-          Have an interesting engineering problem or opportunity?
+          Looking for an intern who cares about the details?
         </h2>
         <p
           style={{
@@ -51,7 +51,7 @@ export function SiteFooter() {
             maxWidth: "480px",
           }}
         >
-          I am interested in software engineering internships and opportunities involving backend development, APIs, databases, and application infrastructure.
+          I&apos;m looking for software engineering internships where I can contribute to backend development, APIs, databases, or cloud infrastructure—and keep learning from a strong team.
         </p>
 
         <div style={{ display: "flex", gap: "32px", flexWrap: "wrap" }}>
@@ -88,7 +88,7 @@ export function SiteFooter() {
             color: "var(--text-muted)",
           }}
         >
-          © {year} Manohar. Built with care and curiosity.
+          © {year} Manohar. Built from real projects and plenty of iteration.
         </span>
         <Link
           href="#main-content"

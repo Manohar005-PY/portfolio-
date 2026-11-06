@@ -64,8 +64,8 @@ export function LivingBackground() {
 
     const render = () => {
       const isLight = document.documentElement.getAttribute("data-theme") === "light";
-      const nodeColor = isLight ? "0, 0, 0" : "255, 255, 255";
-      const lineColor = isLight ? "0, 0, 0" : "255, 255, 255";
+      const nodeColor = isLight ? "100, 85, 223" : "185, 177, 255";
+      const lineColor = isLight ? "100, 85, 223" : "185, 177, 255";
 
       ctx.clearRect(0, 0, width, height);
 

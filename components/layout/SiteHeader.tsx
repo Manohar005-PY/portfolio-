@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -12,6 +11,7 @@ const navLinks = [
   { href: "/projects", label: "WORK" },
   { href: "/notes", label: "NOTES" },
   { href: "/about", label: "ABOUT" },
+  { href: "/credentials", label: "CERTS" },
   { href: "/resume", label: "RESUME" },
 ];
 
@@ -34,7 +34,7 @@ export function SiteHeader() {
           top: 0,
           zIndex: 50,
           height: "76px",
-          backgroundColor: scrolled ? "rgba(11, 11, 11, 0.85)" : "transparent",
+          backgroundColor: scrolled ? "color-mix(in srgb, var(--bg-primary) 86%, transparent)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
           borderBottom: `1px solid ${scrolled ? "var(--border)" : "transparent"}`,
@@ -50,7 +50,7 @@ export function SiteHeader() {
             justifyContent: "space-between",
           }}
         >
-          {/* Logo as Manohar */}
+          {/* Personal brand */}
           <Link
             href="/"
             style={{
@@ -60,29 +60,25 @@ export function SiteHeader() {
               textDecoration: "none",
             }}
           >
-            <motion.div
+            <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
               }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              <span className="radar-dot" />
               <span
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  letterSpacing: "0.15em",
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  letterSpacing: "0.06em",
                   color: "var(--text-primary)",
-                  textTransform: "uppercase",
                 }}
               >
-                MANOHAR
+                MANOHAR<span style={{ color: "var(--accent-bright)" }}>.</span>
               </span>
-            </motion.div>
+            </div>
           </Link>
 
           {/* Desktop nav */}
@@ -110,8 +106,7 @@ export function SiteHeader() {
                 >
                   <span>{label}</span>
                   {isActive && (
-                    <motion.div
-                      layoutId="activeNavIndicator"
+                    <span
                       style={{
                         position: "absolute",
                         bottom: 0,
@@ -120,7 +115,6 @@ export function SiteHeader() {
                         height: "1px",
                         backgroundColor: "var(--text-primary)",
                       }}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                 </Link>

@@ -29,7 +29,6 @@ export interface Project {
   status: ProjectStatus;
   githubUrl: string;
   liveUrl?: string;
-  docUrl?: string;
   problem: string;
   problemConstraints: { constraint: string; focus: string }[];
   implementation: string[];
@@ -59,8 +58,6 @@ export const projects: Project[] = [
     category: "backend",
     status: "functional",
     githubUrl: "https://github.com/Manohar005-PY/OrderFlow",
-    docUrl:
-      "https://drive.google.com/file/d/1o7E3ZWCVem7knWsUbeXOwoLXCskvhvA9/view?usp=drive_link",
     problem:
       "Commerce applications involve multiple connected entities and operations. In distributed architectures, saving order data to PostgreSQL and publishing an event (OrderCreated) to a message broker are separate operations. If the database commits but broker communication fails, downstream services never receive the event—the fatal dual-write problem.",
     problemConstraints: [
@@ -141,8 +138,6 @@ export const projects: Project[] = [
     category: "backend",
     status: "prototype",
     githubUrl: "https://github.com/Manohar005-PY/FlowForge",
-    docUrl:
-      "https://drive.google.com/file/d/1lmFqZJrNQDqdy5tHJp6jTbs3TzMQ82DJ/view?usp=drive_link",
     problem:
       "Monolithic API performance degrades rapidly when CPU-intensive or slow I/O tasks run synchronously inside the HTTP lifecycle. Built-in FastAPI BackgroundTasks vanish on server restarts because they run in-process memory. Applications require independent, decoupled worker processes backed by durable state.",
     problemConstraints: [
@@ -227,8 +222,6 @@ export const projects: Project[] = [
     category: "backend",
     status: "functional",
     githubUrl: "https://github.com/Manohar005-PY/IncidentHub",
-    docUrl:
-      "https://drive.google.com/file/d/1y2--imOWb4hoUSIA72CtFAn4XH8is1ku/view?usp=drive_link",
     problem:
       "Enterprise APIs frequently suffer from fragmented error handling, resulting in inconsistent HTTP response structures that break client integrations, complicate debugging, and leak internal stack traces. Incident management requires strict, predictable state transitions and layered architectural separation.",
     problemConstraints: [

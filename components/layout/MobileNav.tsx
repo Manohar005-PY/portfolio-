@@ -18,9 +18,6 @@ export function MobileNav({ links, currentPath }: MobileNavProps) {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  // Close on route change
-  useEffect(() => { setIsOpen(false); }, [currentPath]);
-
   return (
     <>
       <button

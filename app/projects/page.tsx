@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { projects, ProjectCategory } from "@/lib/projects";
+import { projects } from "@/lib/projects";
 import { StatusLabel } from "@/components/ui/StatusLabel";
 
 type Filter = "all" | "backend" | "other";
@@ -22,7 +22,6 @@ export default function ProjectsPage() {
     <div className="container-main" style={{ paddingTop: "80px", paddingBottom: "112px", position: "relative" }}>
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         style={{ marginBottom: "64px", maxWidth: "680px" }}
@@ -113,7 +112,6 @@ export default function ProjectsPage() {
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
@@ -211,7 +209,6 @@ export default function ProjectsPage() {
       </motion.div>
 
       <motion.p
-        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
         style={{

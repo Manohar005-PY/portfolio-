@@ -143,19 +143,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   </a>
                 </div>
               )}
-              {project.docUrl && (
-                <div>
-                  <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "var(--text-muted)", marginBottom: "6px" }}>DIAGRAM / SPEC</p>
-                  <a
-                    href={project.docUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-underline"
-                  >
-                    View drive doc ↗
-                  </a>
-                </div>
-              )}
             </div>
           </div>
         </div>

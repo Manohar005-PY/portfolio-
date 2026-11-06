@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "motion/react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const toolkit = [
@@ -35,19 +32,15 @@ export function TechnicalToolkit() {
     >
       <div className="container-main">
         <SectionHeading
-          number="05 / TECHNICAL TOOLKIT"
-          title="Technologies I work with"
-          description="A proven stack focused on building reliable, testable, and maintainable backend systems."
+          number="TOOLS I USE"
+          title="A practical stack, chosen project by project."
+          description="These are the tools I have used to build, test, deploy, and learn from the projects above."
         />
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           {toolkit.map((category, i) => (
-            <motion.div
+            <div
               key={category.label}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.35, delay: i * 0.07 }}
               style={{
                 borderTop: "1px solid var(--border)",
                 borderBottom: i === toolkit.length - 1 ? "1px solid var(--border)" : "none",
@@ -67,10 +60,8 @@ export function TechnicalToolkit() {
               </span>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                 {category.items.map((item) => (
-                  <motion.span
+                  <span
                     key={item}
-                    whileHover={{ y: -3, scale: 1.04 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
                     style={{
                       fontFamily: "var(--font-mono)",
                       fontSize: "12px",
@@ -80,22 +71,14 @@ export function TechnicalToolkit() {
                       padding: "6px 12px",
                       borderRadius: "var(--radius-sm)",
                       cursor: "default",
-                      transition: "border-color 150ms ease, color 150ms ease",
                     }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = "var(--border-hover)";
-                      (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-                      (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
-                    }}
+                    className="tool-chip"
                   >
                     {item}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

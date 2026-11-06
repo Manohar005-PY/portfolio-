@@ -8,7 +8,6 @@ export default function ContactPage() {
     <div className="container-main" style={{ paddingTop: "80px", paddingBottom: "112px", position: "relative" }}>
       <div style={{ maxWidth: "680px" }}>
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
@@ -41,7 +40,6 @@ export default function ContactPage() {
           ].map((item, idx) => (
             <motion.div
               key={item.label}
-              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.15 + idx * 0.1 }}
               whileHover={{ y: -3, scale: 1.01 }}
@@ -76,7 +74,6 @@ export default function ContactPage() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           style={{ marginTop: "64px", paddingTop: "32px", borderTop: "1px solid var(--border)" }}

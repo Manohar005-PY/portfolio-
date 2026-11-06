@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { buildMetadata } from "@/lib/metadata";
+import Link from "next/link";
+import { certifications } from "@/lib/certifications";
 
 const journey = [
   {
@@ -61,7 +62,6 @@ export default function AboutPage() {
     <div className="container-main" style={{ paddingTop: "80px", paddingBottom: "112px", position: "relative" }}>
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45 }}
         style={{ marginBottom: "80px", maxWidth: "680px" }}
@@ -102,9 +102,6 @@ export default function AboutPage() {
               {journey.map((item, i) => (
                 <motion.div
                   key={item.stage}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   style={{ display: "flex", gap: "24px", marginBottom: i < journey.length - 1 ? "40px" : 0 }}
                 >
@@ -146,9 +143,6 @@ export default function AboutPage() {
               {principles.map((p, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: i * 0.08 }}
                   whileHover={{ x: 4 }}
                   style={{
@@ -180,9 +174,6 @@ export default function AboutPage() {
               {interests.map((item, i) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: i * 0.08 }}
                   style={{ borderLeft: "2px solid var(--border-hover)", paddingLeft: "20px" }}
                 >
@@ -195,9 +186,6 @@ export default function AboutPage() {
 
           {/* Education */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.4 }}
             style={{ marginBottom: "40px" }}
           >
@@ -222,22 +210,15 @@ export default function AboutPage() {
 
           {/* Certifications */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
             <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.1em", color: "var(--text-muted)", marginBottom: "20px" }}>
               CERTIFICATIONS
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {[
-                "Python for Machine Learning Training — Spoken Tutorial",
-                "Java Training — Spoken Tutorial",
-                "Git Training — Spoken Tutorial",
-              ].map((cert) => (
+              {certifications.map((cert) => (
                 <div
-                  key={cert}
+                  key={cert.title}
                   style={{
                     padding: "14px 18px",
                     border: "1px solid var(--border)",
@@ -246,11 +227,14 @@ export default function AboutPage() {
                   }}
                 >
                   <p style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "var(--text-secondary)" }}>
-                    {cert}
+                    {cert.title}
                   </p>
                 </div>
               ))}
             </div>
+            <Link href="/credentials" className="link-underline" style={{ marginTop: "20px" }}>
+              View credentials ↗
+            </Link>
           </motion.div>
         </div>
       </div>

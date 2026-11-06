@@ -7,14 +7,6 @@ type IncidentState = "NEW" | "INVESTIGATING" | "RESOLVED" | "CLOSED" | "ILLEGAL"
 export function IncidentHubDiagram() {
   const [state, setState] = useState<IncidentState>("NEW");
 
-  const stateColors: Record<IncidentState, string> = {
-    NEW: "var(--text-primary)",
-    INVESTIGATING: "var(--text-primary)",
-    RESOLVED: "var(--text-secondary)",
-    CLOSED: "var(--text-muted)",
-    ILLEGAL: "var(--text-muted)",
-  };
-
   return (
     <div>
       <div
